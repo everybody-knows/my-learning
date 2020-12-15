@@ -8,7 +8,6 @@
 import Foundation
 
 //  Task 1: Quadratic equation
-
 let x = 5
 let y = x * x
 print("Task 1")
