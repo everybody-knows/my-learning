@@ -27,7 +27,7 @@ print("Area of a right triangle: S = ", S)
 print("Perimeter of a right triangle: P = ", P)
 print()
 
-//  Task 3: Deposit amount
+//  *Task 3: Deposit amount
 let years: Int = 5
 let rate: Double = 4.5
 var depositAmount: Double = 1000000
