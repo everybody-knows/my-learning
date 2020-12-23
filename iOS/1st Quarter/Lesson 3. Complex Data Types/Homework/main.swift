@@ -81,7 +81,9 @@ struct TrunkCar {
 //  Task 5
 var maserati: SportCar = SportCar(brand: "Maserati", model: "MC20", year: 2020, trunkVolume: 100, engineState: .off, windowsState: .close)
 maserati.changeEngineState(state: .on)
-maserati.changeWindowsState(state: .open)
+
+var lamborghini: SportCar = SportCar(brand: "Lamborghini", model: "AVENTADOR", year: 2012, trunkVolume: 150, engineState: .off, windowsState: .close)
+lamborghini.changeWindowsState(state: .open)
 
 var man: TrunkCar = TrunkCar(brand: "MAN", model: "TGM", year: 2011, trunkVolume: 64000, filledTrunkVolume: 60000)
 man.changeFilledTrunkVolume(cargo: .load(volume: 10000))
@@ -89,8 +91,11 @@ man.changeFilledTrunkVolume(cargo: .unload(volume: 6000))
 man.changeFilledTrunkVolume(cargo: .load(volume: 10000))
 
 // Task 6
-print("Maserati properties:")
+print("\(maserati.brand) \(maserati.model) properties:")
 maserati.printProperties()
 
-print("MAN properties:")
+print("\(lamborghini.brand) \(lamborghini.model) properties:")
+lamborghini.printProperties()
+
+print("\(man.brand) \(man.model) properties:")
 man.printProperties()
