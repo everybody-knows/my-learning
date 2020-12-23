@@ -9,8 +9,7 @@ import Foundation
 
 //  Task 3
 enum EngineState: String {
-    case on
-    case off
+    case on,off
 }
 enum WindowsState: String {
     case open = "opened"
