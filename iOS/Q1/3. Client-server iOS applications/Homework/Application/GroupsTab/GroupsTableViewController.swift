@@ -6,36 +6,12 @@
 //
 
 import UIKit
+import SDWebImage
 
 class GroupsTableViewController: UITableViewController {
     
-    var avatar: UIImage = UIImage(named: "GroupIcon.png")!
-    
-    var groups = [
-        "Family",
-        "Credo",
-    ]
-    
-    @IBAction func addGroup(segue: UIStoryboardSegue) {
-        
-        // Проверяем идентификатор, чтобы убедиться, что это нужный переход
-        if segue.identifier == "addGroup" {
-            // Получаем ссылку на контроллер, с которого осуществлен переход
-            guard let allGroupsController = segue.source as? AllGroupsTableViewController else {return}
-            // Получаем индекс выделенной ячейки
-            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-                // Получаем группу по индексу
-                let group = allGroupsController.filteredGroups[indexPath.row]
-                // Проверяем, что такой группы нет в списке
-                if !groups.contains(group) {
-                    // Добавляем группу в список групп
-                    groups.append(group)
-                    // Обновляем таблицу
-                    tableView.reloadData()
-                }
-            }
-        }
-    }
+    private var groupsAPI = GroupsAPI()
+    private var groups: [Groups] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +21,14 @@ class GroupsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        // получаем список групп
+        groupsAPI.getGroups { [weak self] groups  in
+            guard let self = self else { return }
+            self.groups = groups
+            self.tableView.reloadData()
+            
+        }
     }
 
     // MARK: - Table view data source
@@ -64,10 +48,11 @@ class GroupsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupsTableViewCell
 
         let group = groups[indexPath.row]
+        cell.groupName.text = group.name
         
-        cell.groupAvatar.image = avatar
-        
-        cell.groupName.text = group
+        if let url = URL(string: group.photo50) {
+            cell.groupAvatar?.sd_setImage(with: url, completed: nil)
+        }
 
         return cell
     }
@@ -119,5 +104,23 @@ class GroupsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @IBAction func addGroup(segue: UIStoryboardSegue) {
+        
+        // Проверяем идентификатор, чтобы убедиться, что это нужный переход
+        if segue.identifier == "addGroup" {
+            // Получаем ссылку на контроллер, с которого осуществлен переход
+            guard let searchGroupsController = segue.source as? SearchGroupsTableViewController else {return}
+            // Получаем индекс выделенной ячейки
+            if let indexPath = searchGroupsController.tableView.indexPathForSelectedRow {
+                // Получаем группу по индексу
+                let group = searchGroupsController.searchGroups[indexPath.row]
+                // Добавляем группу в список групп
+                groups.append(group)
+                // Обновляем таблицу
+                tableView.reloadData()
+            }
+        }
+    }
 
 }

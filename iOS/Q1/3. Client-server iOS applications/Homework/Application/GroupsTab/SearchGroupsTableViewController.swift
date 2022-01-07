@@ -1,39 +1,34 @@
 //
-//  AllGroupsTableViewController.swift
+//  SearchGroupsTableViewController.swift
 //  Homework
 //
-//  Created by Пользователь on 09.02.2021.
+//  Created by Пользователь on 05.01.2022.
 //
 
 import UIKit
+import SDWebImage
 
-class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate{
+class SearchGroupsTableViewController: UITableViewController, UISearchBarDelegate{
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var avatar: UIImage = UIImage(named: "GroupIcon.png")!
-    
-    var groups = [
-        "Bankers",
-        "Thieves",
-        "Courtesans",
-        "Faith",
-        "Art"
-    ]
-    var filteredGroups: [String]!
+    private var groupsAPI = GroupsAPI()
+    var searchGroups: [Groups] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.dataSource = self
-        searchBar.delegate = self
-        filteredGroups = groups
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        tableView.dataSource = self
+        searchBar.delegate = self
+    
+
+        
     }
 
     // MARK: - Table view data source
@@ -45,33 +40,31 @@ class AllGroupsTableViewController: UITableViewController, UISearchBarDelegate{
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return filteredGroups.count
+        return searchGroups.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "allGroupCell", for: indexPath) as! AllGroupsTableViewCell
-        
-        cell.allGroupAvatar.image = avatar
-        
-        cell.allGroupName.text = filteredGroups[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchGroupCell", for: indexPath) as! SearchGroupsTableViewCell
+    
+        let searchGroup = searchGroups[indexPath.row]
+        cell.searchGroupName.text = searchGroup.name
+        if let url = URL(string: searchGroup.photo50) {
+            cell.searchGroupAvatar?.sd_setImage(with: url, completed: nil)
+        }
 
         return cell
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // When there is no text, filteredGroups is the same as the original groups
-        // When user has entered text into the search box
-        // Use the filter method to iterate over all items in the grups array
-        // For each item, return true if the item should be included and false if the
-        // item should NOT be included
-        filteredGroups = searchText.isEmpty ? groups : groups.filter { (item: String) -> Bool in
-        // If dataItem matches the searchText, return true to include it
-            return item.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+
+        guard searchText != "" else { return }
+        // получаем список искомых групп
+        groupsAPI.searchGroups(searchText: searchText) {  [weak self] searchGroups in
+            guard let self = self else { return }
+            self.searchGroups = searchGroups
+            self.tableView.reloadData()
         }
-            
-        tableView.reloadData()
     }
     
 

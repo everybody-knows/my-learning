@@ -41,10 +41,7 @@ class WebViewLoginFormController: UIViewController, WKNavigationDelegate {
                         return dict
                 }
         
-        guard let token = params["access_token"], let userId = params["user_id"] else {
-            print("ERROR: Сould not get response parameters")
-            return
-        }
+        guard let token = params["access_token"], let userId = params["user_id"] else { return }
         decisionHandler(.cancel)
         
         Session.instance.token = token
@@ -52,27 +49,8 @@ class WebViewLoginFormController: UIViewController, WKNavigationDelegate {
         
         print("TOKEN= \(token)")
         
-        /// -------------------------------------------------------------------------
-        /// Пока шлем запросы к VK API здесь, в дальнейшем, необходимо их перенести
-        /// в соответсвующие контроллеры - запросы будут выполняться по мере открытия вкладок.
-        /// -------------------------------------------------------------------------
-    
-        //Получаем список друзей
-        getUserFriends()
-        
-        //Получаем список групп
-        getUserGroups()
-        
-        //Получаем список групп из "строки поиска"
-        getSearchGroups()
-        
-        //Получаем фотографии пользователя
-        getUserPhotos()
-        
         //Обязательно выполнить перед коммитом в GitHub: "Бэ" - Бэзопастность! :)
         WebCacheCleaner.clean()
-        
-        /// -------------------------------------------------------------------------
 
         //Переход на таббар
         performSegue(withIdentifier: "tabBarSegue", sender: nil)
@@ -98,150 +76,6 @@ class WebViewLoginFormController: UIViewController, WKNavigationDelegate {
         let request = URLRequest(url: urlComponents.url!)
         // Отправляем запорс в webView
         webView.load(request)
-    }
-    
-    func getUserFriends() {
-        // Конфигурация по умолчанию
-                let configuration = URLSessionConfiguration.default
-
-        // собственная сессия
-                let session =  URLSession(configuration: configuration)
-                
-        // создаем конструктор для URL
-                var urlConstructor = URLComponents()
-        // устанавливаем схему
-                urlConstructor.scheme = "https"
-        // устанавливаем хост
-                urlConstructor.host = "api.vk.com"
-        // путь
-                urlConstructor.path = "/method/friends.get"
-        // параметры для запроса
-                urlConstructor.queryItems = [
-                    URLQueryItem(name: "v", value: "5.131"),
-                    URLQueryItem(name: "access_token", value: Session.instance.token)
-                ]
-        guard let url = urlConstructor.url else {
-            print("ERROR: ERROR: Сould not create URL")
-            return
-        }
-        // задача для запуска
-        let task = session.dataTask(with: url) { (data, response, error) in
-        // в замыкании данные, полученные от сервера, мы преобразуем в json
-                    let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-        // выводим в консоль
-                    print(json ?? "ERROR: Сould not get JSON")
-                }
-        // запускаем задачу
-                task.resume()
-    }
-    
-    func getUserGroups() {
-        // Конфигурация по умолчанию
-                let configuration = URLSessionConfiguration.default
-
-        // собственная сессия
-                let session =  URLSession(configuration: configuration)
-                
-        // создаем конструктор для URL
-                var urlConstructor = URLComponents()
-        // устанавливаем схему
-                urlConstructor.scheme = "https"
-        // устанавливаем хост
-                urlConstructor.host = "api.vk.com"
-        // путь
-                urlConstructor.path = "/method/users.getSubscriptions"
-        // параметры для запроса
-                urlConstructor.queryItems = [
-                    URLQueryItem(name: "v", value: "5.131"),
-                    URLQueryItem(name: "user_id", value: String(Session.instance.userId)),
-                    URLQueryItem(name: "access_token", value: Session.instance.token)
-                ]
-        guard let url = urlConstructor.url else {
-            print("ERROR: ERROR: Сould not create URL")
-            return
-        }
-        // задача для запуска
-        let task = session.dataTask(with: url) { (data, response, error) in
-        // в замыкании данные, полученные от сервера, мы преобразуем в json
-                    let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-        // выводим в консоль
-                    print(json ?? "ERROR: Сould not get JSON")
-                }
-        // запускаем задачу
-                task.resume()
-    }
-    
-    func getSearchGroups() {
-        // Конфигурация по умолчанию
-                let configuration = URLSessionConfiguration.default
-
-        // собственная сессия
-                let session =  URLSession(configuration: configuration)
-                
-        // создаем конструктор для URL
-                var urlConstructor = URLComponents()
-        // устанавливаем схему
-                urlConstructor.scheme = "https"
-        // устанавливаем хост
-                urlConstructor.host = "api.vk.com"
-        // путь
-                urlConstructor.path = "/method/groups.search"
-        // параметры для запроса
-                urlConstructor.queryItems = [
-                    URLQueryItem(name: "v", value: "5.131"),
-                    URLQueryItem(name: "q", value: "assassin's creed"),
-                    URLQueryItem(name: "access_token", value: Session.instance.token)
-                ]
-        guard let url = urlConstructor.url else {
-            print("ERROR: ERROR: Сould not create URL")
-            return
-        }
-        // задача для запуска
-        let task = session.dataTask(with: url) { (data, response, error) in
-        // в замыкании данные, полученные от сервера, мы преобразуем в json
-                    let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-        // выводим в консоль
-                    print(json ?? "ERROR: Сould not get JSON")
-                }
-        // запускаем задачу
-                task.resume()
-    }
-    
-    func getUserPhotos() {
-        // Конфигурация по умолчанию
-                let configuration = URLSessionConfiguration.default
-
-        // собственная сессия
-                let session =  URLSession(configuration: configuration)
-                
-        // создаем конструктор для URL
-                var urlConstructor = URLComponents()
-        // устанавливаем схему
-                urlConstructor.scheme = "https"
-        // устанавливаем хост
-                urlConstructor.host = "api.vk.com"
-        // путь
-                urlConstructor.path = "/method/photos.get"
-        // параметры для запроса
-                urlConstructor.queryItems = [
-                    URLQueryItem(name: "v", value: "5.131"),
-                    URLQueryItem(name: "owner_id", value: String(Session.instance.userId)),
-                    URLQueryItem(name: "album_id", value: "profile"),
-                    URLQueryItem(name: "access_token", value: Session.instance.token)
-                ]
-        guard let url = urlConstructor.url else {
-            print("ERROR: ERROR: Сould not create URL")
-            return
-        }
-        // задача для запуска
-        let task = session.dataTask(with: url) { (data, response, error) in
-        // в замыкании данные, полученные от сервера, мы преобразуем в json
-                    let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-        // выводим в консоль
-                    print(json ?? "ERROR: Сould not get JSON")
-                }
-        // запускаем задачу
-                task.resume()
     }
     
     //Clear WKWebView's cookies and website data storage

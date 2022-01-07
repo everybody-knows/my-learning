@@ -7,10 +7,10 @@
 
 import UIKit
 
-class AllGroupsTableViewCell: UITableViewCell {
+class SearchGroupsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var allGroupName: UILabel!
-    @IBOutlet weak var allGroupAvatar: UIImageView!
+    @IBOutlet weak var searchGroupName: UILabel!
+    @IBOutlet weak var searchGroupAvatar: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

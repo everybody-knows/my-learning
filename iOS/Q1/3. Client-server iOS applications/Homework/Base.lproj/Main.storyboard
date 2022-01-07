@@ -155,7 +155,7 @@
                                     <outlet property="friendAvatar" destination="s1b-0W-EIh" id="i5L-j4-0j5"/>
                                     <outlet property="friendAvatarShadow" destination="opc-pL-Z4e" id="IFW-XW-1co"/>
                                     <outlet property="friendName" destination="9SI-J4-7Uh" id="3yA-7S-SBa"/>
-                                    <segue destination="tEU-UP-XWY" kind="show" id="aRQ-Rn-S9L"/>
+                                    <segue destination="tEU-UP-XWY" kind="show" identifier="friendPhotoSegue" id="aRQ-Rn-S9L"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -313,22 +313,25 @@
             </objects>
             <point key="canvasLocation" x="2370" y="-708"/>
         </scene>
-        <!--All Groups-->
+        <!--Search Groups-->
         <scene sceneID="MY7-Qy-CIa">
             <objects>
-                <tableViewController id="vwZ-Ld-11b" customClass="AllGroupsTableViewController" customModule="Homework" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="vwZ-Ld-11b" customClass="SearchGroupsTableViewController" customModule="Homework" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YGb-TZ-79B">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="myr-kd-LJU">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
+                            <scopeButtonTitles>
+                                <string>Title</string>
+                            </scopeButtonTitles>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="allGroupCell" rowHeight="70" id="PDI-IR-xb3" customClass="AllGroupsTableViewCell" customModule="Homework" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88.5" width="414" height="70"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchGroupCell" rowHeight="70" id="PDI-IR-xb3" customClass="SearchGroupsTableViewCell" customModule="Homework" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="95.5" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PDI-IR-xb3" id="bvh-Fm-5i3">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
@@ -340,8 +343,8 @@
                                                 <constraint firstAttribute="width" constant="60" id="sdX-B3-ZOa"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Group Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XX9-u3-bgp">
-                                            <rect key="frame" x="100" y="23" width="138" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Group Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XX9-u3-bgp" userLabel="Search Group Name">
+                                            <rect key="frame" x="100" y="23" width="177" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -360,8 +363,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="allGroupAvatar" destination="PHR-hw-mbu" id="sKS-47-M0c"/>
-                                    <outlet property="allGroupName" destination="XX9-u3-bgp" id="Z28-lJ-nKv"/>
+                                    <outlet property="SearchGroupAvatar" destination="PHR-hw-mbu" id="9E1-7f-ZLM"/>
+                                    <outlet property="SearchGroupName" destination="XX9-u3-bgp" id="rwd-eF-40T"/>
                                     <segue destination="Uv4-C7-bwJ" kind="unwind" identifier="addGroup" unwindAction="addGroupWithSegue:" id="JMy-lW-sI5"/>
                                 </connections>
                             </tableViewCell>
@@ -371,7 +374,7 @@
                             <outlet property="delegate" destination="vwZ-Ld-11b" id="u5y-Dv-p2k"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="All Groups" id="jGX-Mh-LMo"/>
+                    <navigationItem key="navigationItem" title="Search Groups" id="jGX-Mh-LMo"/>
                     <connections>
                         <outlet property="searchBar" destination="myr-kd-LJU" id="acn-jP-JXG"/>
                     </connections>
@@ -403,7 +406,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="190" height="190"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lMN-mT-OLH">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lMN-mT-OLH">
                                             <rect key="frame" x="8" y="8" width="174" height="174"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
