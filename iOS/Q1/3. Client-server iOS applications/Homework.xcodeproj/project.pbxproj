@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE01AFBD276A7D540096BCFC /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01AFBC276A7D540096BCFC /* Session.swift */; };
+		CE01AFC1276A8C090096BCFC /* WebViewLoginFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01AFC0276A8C090096BCFC /* WebViewLoginFormController.swift */; };
 		CE63825A2673A10900180586 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6382592673A10900180586 /* NewsTableViewController.swift */; };
 		CE9D699F262CAFA100AE6CD5 /* FriendAvatarShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D699E262CAFA100AE6CD5 /* FriendAvatarShadowView.swift */; };
 		CEC89DCD2624721A003D9CE6 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC89DCC2624721A003D9CE6 /* GradientView.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE01AFBC276A7D540096BCFC /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		CE01AFC0276A8C090096BCFC /* WebViewLoginFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewLoginFormController.swift; sourceTree = "<group>"; };
 		CE6382592673A10900180586 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		CE9D699E262CAFA100AE6CD5 /* FriendAvatarShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAvatarShadowView.swift; sourceTree = "<group>"; };
 		CEC89DCC2624721A003D9CE6 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -94,6 +98,8 @@
 		CE0FF96727680CBA00C5C267 /* Client-Server */ = {
 			isa = PBXGroup;
 			children = (
+				CE01AFBC276A7D540096BCFC /* Session.swift */,
+				CE01AFC0276A8C090096BCFC /* WebViewLoginFormController.swift */,
 			);
 			path = "Client-Server";
 			sourceTree = "<group>";
@@ -261,8 +267,10 @@
 				CEE65F8D25FAC19800DD1291 /* FriendsCollectionViewCell.swift in Sources */,
 				CEFAA04B25C2E91400DBFA5A /* AppDelegate.swift in Sources */,
 				CEFF6761260CB613002FF847 /* Group.swift in Sources */,
+				CE01AFBD276A7D540096BCFC /* Session.swift in Sources */,
 				CEFAA04D25C2E91400DBFA5A /* SceneDelegate.swift in Sources */,
 				CE9D699F262CAFA100AE6CD5 /* FriendAvatarShadowView.swift in Sources */,
+				CE01AFC1276A8C090096BCFC /* WebViewLoginFormController.swift in Sources */,
 				CED89D1D25D2F8EB0013C4ED /* GroupsTableViewCell.swift in Sources */,
 				CED89D2425D2F9580013C4ED /* AllGroupsTableViewController.swift in Sources */,
 				CED8D04E2625E311007FA559 /* HeartButton.swift in Sources */,
