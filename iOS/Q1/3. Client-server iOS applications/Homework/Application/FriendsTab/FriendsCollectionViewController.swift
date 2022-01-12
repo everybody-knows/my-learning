@@ -7,25 +7,17 @@
 
 import UIKit
 import SDWebImage
+import RealmSwift
 
 class FriendsCollectionViewController: UICollectionViewController {
     
     var friendID: Int = 0
     private var photosAPI = PhotosAPI()
-    private var photos: [PhotosDTO] = []
+//    private var photos: [PhotosDTO] = []
     
-    var images: [UIImage] = [
-        UIImage(named: "BartolomeoDAlviano.01.png")!,
-        UIImage(named: "KaterinaSforza.01.png")!,
-        UIImage(named: "LaVolpe.01.png")!,
-        UIImage(named: "Leonardo.01.png")!,
-        UIImage(named: "LorenzoMedici.01.png")!,
-        UIImage(named: "Mario.01.png")!,
-        UIImage(named: "Paula.01.png")!,
-        UIImage(named: "Rosa.01.png")!,
-        UIImage(named: "Teodora.01.png")!
-    ]
-
+    private var photos: Results<PhotosDAO>?
+    private var photosDB = PhotosDB()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,8 +32,16 @@ class FriendsCollectionViewController: UICollectionViewController {
         // получаем фотографии
         photosAPI.getPhotos(friendID: friendID) { [weak self] photos  in
             guard let self = self else { return }
+//            //сохраняем фотографии в струкруре Photos
+//            self.photos = photos
+            //удаляем все из Realm DB
+            self.photosDB.deleteAll()
+            //сохраняем список групп в Realm DB
+            self.photosDB.save(photos)
+            //получаем список групп из Realm DB
+            self.photos = self.photosDB.fetch()
             
-            self.photos = photos
+            
             self.collectionView.reloadData()
 
         }
@@ -67,14 +67,15 @@ class FriendsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
+        guard let photos = photos else { return 0 }
         return photos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendImageCell", for: indexPath) as! FriendsCollectionViewCell
     
-        let photo = photos[indexPath.row]
-        if let url = URL(string: photo.sizes[0].url) {
+        let photo = photos?[indexPath.row]
+        if let url = URL(string: (photo?.sizes[0].url)!) {
             cell.friendImage?.sd_setImage(with: url, completed: nil)
         }
         return cell

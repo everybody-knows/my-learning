@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import RealmSwift
+import SwiftyJSON
 
 final class GroupsAPI {
     
-    func getGroups(completion: @escaping([Groups])->()) {
+    func getGroups(completion: @escaping([GroupsDAO])->()) {
         // Конфигурация по умолчанию
                 let configuration = URLSessionConfiguration.default
         // собственная сессия
@@ -39,15 +41,20 @@ final class GroupsAPI {
             // выводим в консоль
             //  print(jsonData)
 
-                    // данные полученные от сервер преобразуем в объект
                     guard let jsonData = data else {return}
                     DispatchQueue.main.async {
                         do {
-                            let jsonData: Any = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
-                            let jsonObject = jsonData as! [String: Any]
-                            let response = jsonObject["response"] as! [String: Any]
-                            let items = response["items"] as! [Any]
-                            let groups = items.map { Groups(item: $0 as! [String: Any]) }
+//                            // данные полученные от сервера преобразуем в объект
+//                            let jsonData: Any = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+//                            let jsonObject = jsonData as! [String: Any]
+//                            let response = jsonObject["response"] as! [String: Any]
+//                            let items = response["items"] as! [Any]
+//                            let groups = items.map { Groups(item: $0 as! [String: Any]) }
+                            
+                            // данные полученные от сервера преобразуем в DAO
+                            let itemsData = try JSON(jsonData)["response"]["items"].rawData()
+                            let groups = try JSONDecoder().decode([GroupsDAO].self, from: itemsData)
+                            
                             completion(groups)
                         } catch {
                             print(error)
@@ -58,7 +65,7 @@ final class GroupsAPI {
                 task.resume()
     }
     
-    func searchGroups(searchText: String, completion: @escaping([Groups])->()) {
+    func searchGroups(searchText: String, completion: @escaping([GroupsDAO])->()) {
         // Конфигурация по умолчанию
                 let configuration = URLSessionConfiguration.default
         // собственная сессия
@@ -87,17 +94,21 @@ final class GroupsAPI {
             // выводим в консоль
             //  print(jsonData)
 
-            // данные полученные от сервер преобразуем в объект
             guard let jsonData = data else {return}
-
             DispatchQueue.main.async {
                 do {
-                    let jsonData: Any = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
-                    let jsonObject = jsonData as! [String: Any]
-                    let response = jsonObject["response"] as! [String: Any]
-                    let items = response["items"] as! [Any]
+//                    // данные полученные от сервер преобразуем в объект
+//                    let jsonData: Any = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+//                    let jsonObject = jsonData as! [String: Any]
+//                    let response = jsonObject["response"] as! [String: Any]
+//                    let items = response["items"] as! [Any]
+//
+//                    let searchGroups = items.map { GroupsDAO(item: $0 as! [String: Any]) }
                     
-                    let searchGroups = items.map { Groups(item: $0 as! [String: Any]) }
+                    // данные полученные от сервера преобразуем в DAO
+                    let itemsData = try JSON(jsonData)["response"]["items"].rawData()
+                    let searchGroups = try JSONDecoder().decode([GroupsDAO].self, from: itemsData)
+                    
                     completion(searchGroups)
                 } catch {
                     print(error)

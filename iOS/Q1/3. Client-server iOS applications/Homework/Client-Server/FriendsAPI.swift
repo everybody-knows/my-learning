@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 final class FriendsAPI {
 
-    func getFriends(completion: @escaping([Friends])->()) {
+    func getFriends(completion: @escaping([FriendsDAO])->()) {
         // конфигурация по умолчанию
         let configuration = URLSessionConfiguration.default
         // собственная сессия
@@ -31,19 +32,23 @@ final class FriendsAPI {
         guard let url = urlConstructor.url else { return }
         // задача для запуска
         let task = session.dataTask(with: url) { (data, response, error) in
-            // данные полученные от сервера преобразуем в json
-            //   let jsonData = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? Data
-            //  guard let jsonData = data?.prettyJSON else {return}
-            // выводим в консоль
-            //  print(jsonData)
+//            // данные полученные от сервера преобразуем в json
+//               let jsonData = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? Data
+//              guard let jsonData = data?.prettyJSON else {return}
+//            // выводим в консоль
+//              print(jsonData)
 
-            // данные полученные от сервер преобразуем в объект
             guard let jsonData = data else {return}
             
             DispatchQueue.main.async {
                 do {
-                    let friendsContainer = try JSONDecoder().decode(FriendsContainer.self, from: jsonData)
-                    let friends = friendsContainer.response.items
+//                    // данные полученные от сервер преобразуем в объект
+//                    let friendsContainer = try JSONDecoder().decode(FriendsContainer.self, from: jsonData)
+//                    let friends = friendsContainer.response.items
+                    
+                    // данные полученные от сервера преобразуем в DAO
+                    let itemsData = try JSON(jsonData)["response"]["items"].rawData()
+                    let friends = try JSONDecoder().decode([FriendsDAO].self, from: itemsData)
                     completion(friends)
                 } catch {
                     print(error)

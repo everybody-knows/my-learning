@@ -7,11 +7,17 @@
 
 import UIKit
 import SDWebImage
+import RealmSwift
 
 class GroupsTableViewController: UITableViewController {
     
     private var groupsAPI = GroupsAPI()
-    private var groups: [Groups] = []
+//    private var groups: [Groups] = []
+    
+    private var groupsDB = GroupsDB()
+    private var groups: Results<GroupsDAO>?
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +31,18 @@ class GroupsTableViewController: UITableViewController {
         // получаем список групп
         groupsAPI.getGroups { [weak self] groups  in
             guard let self = self else { return }
-            self.groups = groups
+//            //сохраняем список групп в струкруре Groups
+//            self.groups = groups
+            //удаляем все из Realm DB
+            self.groupsDB.deleteAll()
+            //сохраняем список групп в Realm DB
+            self.groupsDB.save(groups)
+            //получаем список групп из Realm DB
+            self.groups = self.groupsDB.fetch()
+            // обновляем таблицу
             self.tableView.reloadData()
-            
         }
+        
     }
 
     // MARK: - Table view data source
@@ -40,6 +54,8 @@ class GroupsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        
+        guard let groups = groups else { return 0 }
         return groups.count
     }
 
@@ -47,10 +63,10 @@ class GroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath) as! GroupsTableViewCell
 
-        let group = groups[indexPath.row]
-        cell.groupName.text = group.name
+        let group = groups?[indexPath.row]
+        cell.groupName.text = group?.name
         
-        if let url = URL(string: group.photo50) {
+        if let url = URL(string: group?.photo50 ?? "") {
             cell.groupAvatar?.sd_setImage(with: url, completed: nil)
         }
 
@@ -72,7 +88,7 @@ class GroupsTableViewController: UITableViewController {
         // Если была нажата кнопка «Удалить»
         if editingStyle == .delete {
             // Удаляем группу из массива
-            groups.remove(at: indexPath.row)
+            // groups.remove(at: indexPath.row)
             // И удаляем строку из таблицы
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -115,8 +131,16 @@ class GroupsTableViewController: UITableViewController {
             if let indexPath = searchGroupsController.tableView.indexPathForSelectedRow {
                 // Получаем группу по индексу
                 let group = searchGroupsController.searchGroups[indexPath.row]
-                // Добавляем группу в список групп
-                groups.append(group)
+//                // Добавляем группу в список групп
+//                groups.append(group)
+//                // Обновляем таблицу
+//                tableView.reloadData()
+                
+                // добавляем группу в Realm
+                self.groupsDB.save([group])
+                //получаем список групп из Realm DB
+                self.groups = self.groupsDB.fetch()
+                                
                 // Обновляем таблицу
                 tableView.reloadData()
             }

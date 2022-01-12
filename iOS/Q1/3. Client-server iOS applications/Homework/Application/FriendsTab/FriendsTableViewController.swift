@@ -7,13 +7,17 @@
 
 import UIKit
 import SDWebImage
+import RealmSwift
 
 final class FriendsTableViewController: UITableViewController {
     
     private var friendsAPI = FriendsAPI()
-    private var friends: [Friends] = []
-    private var friendsDictionary = [String: [Friends]]()
+//    private var friends: [Friends] = []
+    private var friends: Results<FriendsDAO>?
+    private var friendsDB = FriendsDB()
+    private var friendsDictionary = [String: [FriendsDAO]]()
     private var friendSectionTitles = [String]()
+    
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +32,15 @@ final class FriendsTableViewController: UITableViewController {
         // получаем список друзей
         friendsAPI.getFriends { [weak self] friends  in
             guard let self = self else { return }
-            self.friends = friends
+//            //сохраняем список друзей в струкруре Friends
+//            self.friends = friends
+            //удаляем все из Realm DB
+            self.friendsDB.deleteAll()
+            //сохраняем список групп в Realm DB
+            self.friendsDB.save(friends)
+            //получаем список групп из Realm DB
+            self.friends = self.friendsDB.fetch()
+              
             
             // формируем заголовки для секций ф таблице
             for friend in friends {
@@ -120,7 +132,7 @@ final class FriendsTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     */
 

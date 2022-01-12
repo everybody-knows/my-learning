@@ -17,7 +17,7 @@ final class PhotosAPI {
     let accessToken = Session.instance.token
     let version = "5.131"
     
-    func getPhotos(friendID: Int, completion: @escaping([PhotosDTO])->()) {
+    func getPhotos(friendID: Int, completion: @escaping([PhotosDAO])->()) {
         
         // еще параметры подключения
         print(friendID)
@@ -35,11 +35,11 @@ final class PhotosAPI {
         AF.request(url, method: .get, parameters: params).responseJSON { response in
 
             guard let jsonData = response.data else { return }
-           // print(response.data?.prettyJSON)
+//            print(response.data?.prettyJSON)
             do {
                 // данные полученные от сервер преобразуем в объект
                 let itemsData = try JSON(jsonData)["response"]["items"].rawData()
-                let photos = try JSONDecoder().decode([PhotosDTO].self, from: itemsData)
+                let photos = try JSONDecoder().decode([PhotosDAO].self, from: itemsData)
                 
                 completion(photos)
             } catch {
