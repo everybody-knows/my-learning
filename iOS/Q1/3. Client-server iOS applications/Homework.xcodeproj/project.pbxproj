@@ -12,6 +12,10 @@
 		CE2A4DA82771EEA30029A250 /* Data+PrettyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A4DA72771EEA30029A250 /* Data+PrettyJSON.swift */; };
 		CE2A4DAA27720B9F0029A250 /* Friends(CodableContainer).swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A4DA927720B9F0029A250 /* Friends(CodableContainer).swift */; };
 		CE2A4DAC2772375A0029A250 /* FriendsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A4DAB2772375A0029A250 /* FriendsAPI.swift */; };
+		CE5B12EB278F7E4600405679 /* Friends(DataAccessObject).swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B12EA278F7E4600405679 /* Friends(DataAccessObject).swift */; };
+		CE5B12EE278F822300405679 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE5B12ED278F822300405679 /* RealmSwift */; };
+		CE5B12F0278F827100405679 /* Groups(DataAccessObject).swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B12EF278F827100405679 /* Groups(DataAccessObject).swift */; };
+		CE5B12F2278F82D700405679 /* Photos(DataAccessObject).swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B12F1278F82D700405679 /* Photos(DataAccessObject).swift */; };
 		CE63825A2673A10900180586 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6382592673A10900180586 /* NewsTableViewController.swift */; };
 		CE7B83852784EB9B00E3764A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = CE7B83842784EB9B00E3764A /* SDWebImage */; };
 		CE7B83872785084400E3764A /* GroupsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B83862785084400E3764A /* GroupsAPI.swift */; };
@@ -48,6 +52,9 @@
 		CE2A4DA72771EEA30029A250 /* Data+PrettyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+PrettyJSON.swift"; sourceTree = "<group>"; };
 		CE2A4DA927720B9F0029A250 /* Friends(CodableContainer).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friends(CodableContainer).swift"; sourceTree = "<group>"; };
 		CE2A4DAB2772375A0029A250 /* FriendsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAPI.swift; sourceTree = "<group>"; };
+		CE5B12EA278F7E4600405679 /* Friends(DataAccessObject).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friends(DataAccessObject).swift"; sourceTree = "<group>"; };
+		CE5B12EF278F827100405679 /* Groups(DataAccessObject).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Groups(DataAccessObject).swift"; sourceTree = "<group>"; };
+		CE5B12F1278F82D700405679 /* Photos(DataAccessObject).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photos(DataAccessObject).swift"; sourceTree = "<group>"; };
 		CE6382592673A10900180586 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		CE7B83862785084400E3764A /* GroupsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsAPI.swift; sourceTree = "<group>"; };
 		CE7B838E278660C400E3764A /* PhotosAPI(Alamofire+SwiftyJSON).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosAPI(Alamofire+SwiftyJSON).swift"; sourceTree = "<group>"; };
@@ -82,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5B12EE278F822300405679 /* RealmSwift in Frameworks */,
 				CE7B838D278621DD00E3764A /* SwiftyJSON in Frameworks */,
 				CE7B83852784EB9B00E3764A /* SDWebImage in Frameworks */,
 				CE7B838A2786211100E3764A /* Alamofire in Frameworks */,
@@ -210,9 +218,12 @@
 			isa = PBXGroup;
 			children = (
 				CEFF675C260CB5FC002FF847 /* User.swift */,
-				CEFF6760260CB613002FF847 /* Groups(Manual).swift */,
 				CE2A4DA927720B9F0029A250 /* Friends(CodableContainer).swift */,
+				CE5B12EA278F7E4600405679 /* Friends(DataAccessObject).swift */,
+				CEFF6760260CB613002FF847 /* Groups(Manual).swift */,
+				CE5B12EF278F827100405679 /* Groups(DataAccessObject).swift */,
 				CE7B83902786623D00E3764A /* Photos(DataTransferObject).swift */,
+				CE5B12F1278F82D700405679 /* Photos(DataAccessObject).swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -237,6 +248,7 @@
 				CE7B83842784EB9B00E3764A /* SDWebImage */,
 				CE7B83892786211100E3764A /* Alamofire */,
 				CE7B838C278621DD00E3764A /* SwiftyJSON */,
+				CE5B12ED278F822300405679 /* RealmSwift */,
 			);
 			productName = Homework;
 			productReference = CEFAA04725C2E91400DBFA5A /* Homework.app */;
@@ -269,6 +281,7 @@
 				CE7B83832784EB9A00E3764A /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				CE7B83882786211100E3764A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CE7B838B278621DD00E3764A /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				CE5B12EC278F822300405679 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = CEFAA04825C2E91400DBFA5A /* Products */;
 			projectDirPath = "";
@@ -302,8 +315,11 @@
 				CEEFE0822746F92B00E9877C /* NewsTableViewCustomCell.swift in Sources */,
 				CEFAA06225C2E9BB00DBFA5A /* LoginFormController.swift in Sources */,
 				CEC89DCD2624721A003D9CE6 /* GradientView.swift in Sources */,
+				CE5B12EB278F7E4600405679 /* Friends(DataAccessObject).swift in Sources */,
+				CE5B12F0278F827100405679 /* Groups(DataAccessObject).swift in Sources */,
 				CE7B838F278660C400E3764A /* PhotosAPI(Alamofire+SwiftyJSON).swift in Sources */,
 				CE63825A2673A10900180586 /* NewsTableViewController.swift in Sources */,
+				CE5B12F2278F82D700405679 /* Photos(DataAccessObject).swift in Sources */,
 				CED89D2725D2F9580013C4ED /* SearchGroupsTableViewCell.swift in Sources */,
 				CEE65F8A25FAC0D000DD1291 /* FriendsCollectionViewController.swift in Sources */,
 				CED89D2025D2F9020013C4ED /* GroupsTableViewController.swift in Sources */,
@@ -527,6 +543,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CE5B12EC278F822300405679 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.21.1;
+			};
+		};
 		CE7B83832784EB9A00E3764A /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -554,6 +578,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CE5B12ED278F822300405679 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE5B12EC278F822300405679 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		CE7B83842784EB9B00E3764A /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE7B83832784EB9A00E3764A /* XCRemoteSwiftPackageReference "SDWebImage" */;
