@@ -16,6 +16,7 @@ class GroupsTableViewController: UITableViewController {
     
     private var groupsDB = GroupsDB()
     private var groups: Results<GroupsDAO>?
+    private var notificationToken: NotificationToken?
     
     
 
@@ -28,19 +29,45 @@ class GroupsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        
+        //удаляем список групп из Realm DB
+        self.groups = self.groupsDB.fetch()
+        self.groupsDB.delete(groups!)
+        
         // получаем список групп
         groupsAPI.getGroups { [weak self] groups  in
             guard let self = self else { return }
 //            //сохраняем список групп в струкруре Groups
 //            self.groups = groups
-            //удаляем все из Realm DB
-            self.groupsDB.deleteAll()
+
             //сохраняем список групп в Realm DB
             self.groupsDB.save(groups)
             //получаем список групп из Realm DB
             self.groups = self.groupsDB.fetch()
             // обновляем таблицу
-            self.tableView.reloadData()
+            //self.tableView.reloadData()
+            
+            //автоматическое обновление при изменении данных в Realm через notifications
+            self.notificationToken = self.groups?.observe(on: .main, { [weak self] changes in
+                
+                guard let self = self else { return }
+                
+                switch changes {
+                case .initial:
+                    self.tableView.reloadData()
+                    
+                case .update(_, let deletions, let insertions, let modifications):
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                    self.tableView.endUpdates()
+                    
+                case .error(let error):
+                    print("\(error)")
+                }
+
+            })
         }
         
     }
@@ -139,10 +166,10 @@ class GroupsTableViewController: UITableViewController {
                 // добавляем группу в Realm
                 self.groupsDB.save([group])
                 //получаем список групп из Realm DB
-                self.groups = self.groupsDB.fetch()
+                //self.groups = self.groupsDB.fetch()
                                 
                 // Обновляем таблицу
-                tableView.reloadData()
+                //tableView.reloadData()
             }
         }
     }

@@ -39,7 +39,7 @@ final class GroupsDB {
         }
     }
     
-    func delete(_ item: GroupsDAO) {
+    func delete(_ item: Results<GroupsDAO>) {
         let realm = try! Realm()
         
         try! realm.write {
