@@ -7,8 +7,12 @@
 
 import UIKit
 import WebKit
+import Firebase
 
 class WebViewLoginFormController: UIViewController, WKNavigationDelegate {
+    
+    //ссылка на контейнер в Firebase
+    let refFB = Database.database().reference(withPath: "LoggedUsers")
 
     @IBOutlet weak var webView: WKWebView! {
         didSet{
@@ -44,8 +48,14 @@ class WebViewLoginFormController: UIViewController, WKNavigationDelegate {
         guard let token = params["access_token"], let userId = params["user_id"] else { return }
         decisionHandler(.cancel)
         
+        //сохраняем токен и id пользователя в Session
         Session.instance.token = token
         Session.instance.userId = Int(userId) ?? -1
+        
+        ///добавляем пользователя в Firebase
+        let userFB = UserFB(id: Int(userId) ?? -1, addedGroups: [])
+        let usersContainerRef = self.refFB.child(userId)
+        usersContainerRef.setValue(userFB.toAnyObject())
         
         print("TOKEN= \(token)")
         

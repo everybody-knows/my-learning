@@ -20,6 +20,11 @@
 		CE5B1307278F912A00405679 /* GroupsDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B1306278F912A00405679 /* GroupsDB.swift */; };
 		CE5B1309278F917900405679 /* PhotosDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5B1308278F917900405679 /* PhotosDB.swift */; };
 		CE63825A2673A10900180586 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6382592673A10900180586 /* NewsTableViewController.swift */; };
+		CE69875A2795D37600D22D9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE6987592795D37600D22D9B /* GoogleService-Info.plist */; };
+		CE69875D2795D56A00D22D9B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE69875C2795D56A00D22D9B /* FirebaseAuth */; };
+		CE69875F2795D56A00D22D9B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CE69875E2795D56A00D22D9B /* FirebaseDatabase */; };
+		CE6987612795DE4000D22D9B /* Group(Firebase).swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6987602795DE4000D22D9B /* Group(Firebase).swift */; };
+		CE6987632796090E00D22D9B /* User(Firebase).swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6987622796090E00D22D9B /* User(Firebase).swift */; };
 		CE7B83852784EB9B00E3764A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = CE7B83842784EB9B00E3764A /* SDWebImage */; };
 		CE7B83872785084400E3764A /* GroupsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B83862785084400E3764A /* GroupsAPI.swift */; };
 		CE7B838A2786211100E3764A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE7B83892786211100E3764A /* Alamofire */; };
@@ -62,6 +67,9 @@
 		CE5B1306278F912A00405679 /* GroupsDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsDB.swift; sourceTree = "<group>"; };
 		CE5B1308278F917900405679 /* PhotosDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosDB.swift; sourceTree = "<group>"; };
 		CE6382592673A10900180586 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
+		CE6987592795D37600D22D9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE6987602795DE4000D22D9B /* Group(Firebase).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group(Firebase).swift"; sourceTree = "<group>"; };
+		CE6987622796090E00D22D9B /* User(Firebase).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User(Firebase).swift"; sourceTree = "<group>"; };
 		CE7B83862785084400E3764A /* GroupsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsAPI.swift; sourceTree = "<group>"; };
 		CE7B838E278660C400E3764A /* PhotosAPI(Alamofire+SwiftyJSON).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosAPI(Alamofire+SwiftyJSON).swift"; sourceTree = "<group>"; };
 		CE7B83902786623D00E3764A /* Photos(DataTransferObject).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photos(DataTransferObject).swift"; sourceTree = "<group>"; };
@@ -95,7 +103,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE69875F2795D56A00D22D9B /* FirebaseDatabase in Frameworks */,
 				CE5B12FD278F8E0000405679 /* RealmSwift in Frameworks */,
+				CE69875D2795D56A00D22D9B /* FirebaseAuth in Frameworks */,
 				CE7B838D278621DD00E3764A /* SwiftyJSON in Frameworks */,
 				CE7B83852784EB9B00E3764A /* SDWebImage in Frameworks */,
 				CE7B838A2786211100E3764A /* Alamofire in Frameworks */,
@@ -219,6 +229,7 @@
 				CEFAA05525C2E91600DBFA5A /* LaunchScreen.storyboard */,
 				CEFAA04C25C2E91400DBFA5A /* SceneDelegate.swift */,
 				CEFAA05825C2E91600DBFA5A /* Info.plist */,
+				CE6987592795D37600D22D9B /* GoogleService-Info.plist */,
 			);
 			path = Homework;
 			sourceTree = "<group>";
@@ -230,9 +241,11 @@
 				CE2A4DA927720B9F0029A250 /* Friends(CodableContainer).swift */,
 				CE5B12FE278F8E2C00405679 /* Friends(DataAccessObject).swift */,
 				CEFF6760260CB613002FF847 /* Groups(Manual).swift */,
+				CE6987602795DE4000D22D9B /* Group(Firebase).swift */,
 				CE5B1300278F8E5B00405679 /* Groups(DataAccessObject).swift */,
 				CE7B83902786623D00E3764A /* Photos(DataTransferObject).swift */,
 				CE5B1302278F8E7D00405679 /* Photos(DataAccessObject).swift */,
+				CE6987622796090E00D22D9B /* User(Firebase).swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -258,6 +271,8 @@
 				CE7B83892786211100E3764A /* Alamofire */,
 				CE7B838C278621DD00E3764A /* SwiftyJSON */,
 				CE5B12FC278F8E0000405679 /* RealmSwift */,
+				CE69875C2795D56A00D22D9B /* FirebaseAuth */,
+				CE69875E2795D56A00D22D9B /* FirebaseDatabase */,
 			);
 			productName = Homework;
 			productReference = CEFAA04725C2E91400DBFA5A /* Homework.app */;
@@ -291,6 +306,7 @@
 				CE7B83882786211100E3764A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CE7B838B278621DD00E3764A /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				CE5B12FB278F8E0000405679 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				CE69875B2795D56A00D22D9B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = CEFAA04825C2E91400DBFA5A /* Products */;
 			projectDirPath = "";
@@ -308,6 +324,7 @@
 			files = (
 				CEFAA05725C2E91600DBFA5A /* LaunchScreen.storyboard in Resources */,
 				CEFAA05425C2E91600DBFA5A /* Assets.xcassets in Resources */,
+				CE69875A2795D37600D22D9B /* GoogleService-Info.plist in Resources */,
 				CEFAA05225C2E91400DBFA5A /* Main.storyboard in Resources */,
 				CEEFE0832746F92B00E9877C /* NewsTableViewCustomCell.xib in Resources */,
 			);
@@ -340,6 +357,8 @@
 				CE5B1305278F909F00405679 /* FriendsDB.swift in Sources */,
 				CE01AFBD276A7D540096BCFC /* SessionSingletone.swift in Sources */,
 				CE7B83872785084400E3764A /* GroupsAPI.swift in Sources */,
+				CE6987632796090E00D22D9B /* User(Firebase).swift in Sources */,
+				CE6987612795DE4000D22D9B /* Group(Firebase).swift in Sources */,
 				CEFAA04D25C2E91400DBFA5A /* SceneDelegate.swift in Sources */,
 				CE2A4DA82771EEA30029A250 /* Data+PrettyJSON.swift in Sources */,
 				CE7B83912786623D00E3764A /* Photos(DataTransferObject).swift in Sources */,
@@ -505,7 +524,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Everybody-Knows.Homework";
+				PRODUCT_BUNDLE_IDENTIFIER = "Everybody-Knows.Simple-VK-Client";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -524,7 +543,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Everybody-Knows.Homework";
+				PRODUCT_BUNDLE_IDENTIFIER = "Everybody-Knows.Simple-VK-Client";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -563,6 +582,14 @@
 				minimumVersion = 10.20.2;
 			};
 		};
+		CE69875B2795D56A00D22D9B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		CE7B83832784EB9A00E3764A /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -594,6 +621,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE5B12FB278F8E0000405679 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		CE69875C2795D56A00D22D9B /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE69875B2795D56A00D22D9B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		CE69875E2795D56A00D22D9B /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE69875B2795D56A00D22D9B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
 		};
 		CE7B83842784EB9B00E3764A /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;

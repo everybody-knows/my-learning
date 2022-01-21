@@ -8,6 +8,7 @@
 import UIKit
 import SDWebImage
 import RealmSwift
+import Firebase
 
 class GroupsTableViewController: UITableViewController {
     
@@ -17,6 +18,9 @@ class GroupsTableViewController: UITableViewController {
     private var groupsDB = GroupsDB()
     private var groups: Results<GroupsDAO>?
     private var notificationToken: NotificationToken?
+    
+    //ссылка на контейнер в Firebase
+    let refFB = Database.database().reference(withPath: "LoggedUsers/\(Session.instance.userId)/addedGroups")
     
     
 
@@ -167,7 +171,12 @@ class GroupsTableViewController: UITableViewController {
                 self.groupsDB.save([group])
                 //получаем список групп из Realm DB
                 //self.groups = self.groupsDB.fetch()
-                                
+                
+                //добавляем группу в Firebase
+                let groupFB = GroupFB(id: group.id, name: group.name, photo50: group.photo50)
+                let groupContainerRef = self.refFB.child(String(group.id))
+                groupContainerRef.setValue(groupFB.toAnyObject())
+            
                 // Обновляем таблицу
                 //tableView.reloadData()
             }
