@@ -17,6 +17,7 @@ final class FriendsTableViewController: UITableViewController {
     private var friendsDB = FriendsDB()
     private var friendsDictionary = [String: [FriendsDAO]]()
     private var friendSectionTitles = [String]()
+    private var notificationToken: NotificationToken?
     
         
     override func viewDidLoad() {
@@ -28,14 +29,15 @@ final class FriendsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        //удаляем список друзей из Realm DB
+        self.friends = self.friendsDB.fetch()
+        self.friendsDB.delete(friends!)
         
         // получаем список друзей
         friendsAPI.getFriends { [weak self] friends  in
             guard let self = self else { return }
 //            //сохраняем список друзей в струкруре Friends
 //            self.friends = friends
-            //удаляем все из Realm DB
-            self.friendsDB.deleteAll()
             //сохраняем список групп в Realm DB
             self.friendsDB.save(friends)
             //получаем список групп из Realm DB
@@ -56,7 +58,29 @@ final class FriendsTableViewController: UITableViewController {
             self.friendSectionTitles = [String](self.friendsDictionary.keys)
             self.friendSectionTitles = self.friendSectionTitles.sorted(by: { $0 < $1 })
 
-            self.tableView.reloadData()
+            //self.tableView.reloadData()
+            
+            //автоматическое обновление при изменении данных в Realm через notifications
+            self.notificationToken = self.friends?.observe(on: .main, { [weak self] changes in
+                
+                guard let self = self else { return }
+                
+                switch changes {
+                case .initial:
+                    self.tableView.reloadData()
+                    
+                case .update(_, let deletions, let insertions, let modifications):
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                    self.tableView.endUpdates()
+                    
+                case .error(let error):
+                    print("\(error)")
+                }
+
+            })
             
         }
         
@@ -93,7 +117,9 @@ final class FriendsTableViewController: UITableViewController {
                 cell.friendName?.text = "\(friend.lastName) \(friend.firstName)"
                // cell.friendAvatar?.image = UIImage(named:friendValues[indexPath.row])!
                 if let url = URL(string: friend.photo50) {
-                    cell.friendAvatar?.sd_setImage(with: url, completed: nil)
+                    cell.friendAvatar?.sd_setImage(with: url, completed: { image, _, _, _ in
+                        tableView.reloadRows(at: [indexPath], with: .automatic)
+                    })
                 }
                 
             }

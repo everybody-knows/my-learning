@@ -39,7 +39,7 @@ final class PhotosDB {
         }
     }
     
-    func delete(_ item: PhotosDAO) {
+    func delete(_ item: Results<PhotosDAO>) {
         let realm = try! Realm()
         
         try! realm.write {

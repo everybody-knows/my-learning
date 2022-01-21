@@ -17,6 +17,7 @@ class FriendsCollectionViewController: UICollectionViewController {
     
     private var photos: Results<PhotosDAO>?
     private var photosDB = PhotosDB()
+    private var notificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,21 +30,42 @@ class FriendsCollectionViewController: UICollectionViewController {
 
         // Do any additional setup after loading the view.
         
+        //удаляем фотографии из Realm DB
+        self.photos = self.photosDB.fetch()
+        self.photosDB.delete(photos!)
+        
         // получаем фотографии
         photosAPI.getPhotos(friendID: friendID) { [weak self] photos  in
             guard let self = self else { return }
 //            //сохраняем фотографии в струкруре Photos
 //            self.photos = photos
-            //удаляем все из Realm DB
-            self.photosDB.deleteAll()
+            
+        
             //сохраняем список групп в Realm DB
             self.photosDB.save(photos)
             //получаем список групп из Realm DB
             self.photos = self.photosDB.fetch()
             
+//            self.collectionView.reloadData()
             
-            self.collectionView.reloadData()
+            //автоматическое обновление при изменении данных в Realm через notifications
+            self.notificationToken = self.photos?.observe(on: .main, { [weak self] changes in
+                
+                guard let collectionView = self?.collectionView else { return }
+                switch changes {
+                case .initial:
+                    collectionView.reloadData()
+                case .update(_, let deletions, let insertions, let modifications):
+                    collectionView.performBatchUpdates({
+                        collectionView.insertItems(at: insertions.map({ IndexPath(row: $0, section: 0) }))
+                        collectionView.deleteItems(at: deletions.map({ IndexPath(row: $0, section: 0)}))
+                        collectionView.reloadItems(at: modifications.map({ IndexPath(row: $0, section: 0) }))
+                    }, completion: nil)
+                case .error(let error):
+                    fatalError("\(error)")
+                }
 
+            })
         }
     }
 

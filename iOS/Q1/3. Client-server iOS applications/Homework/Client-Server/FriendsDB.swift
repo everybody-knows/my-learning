@@ -40,7 +40,7 @@ final class FriendsDB {
         }
     }
     
-    func delete(_ item: FriendsDAO) {
+    func delete(_ item: Results<FriendsDAO>) {
         let realm = try! Realm()
         
         try! realm.write {
