@@ -13,7 +13,8 @@ class SearchGroupsTableViewController: UITableViewController, UISearchBarDelegat
     @IBOutlet weak var searchBar: UISearchBar!
     
     private var groupsAPI = GroupsAPI()
-    var searchGroups: [Groups] = []
+//    var searchGroups: [Groups] = []
+    var searchGroups: [GroupsDAO] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +85,7 @@ class SearchGroupsTableViewController: UITableViewController, UISearchBarDelegat
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     */
 
