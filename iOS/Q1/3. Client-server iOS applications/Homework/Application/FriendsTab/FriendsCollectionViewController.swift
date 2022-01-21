@@ -6,11 +6,13 @@
 //
 
 import UIKit
-
-private let reuseIdentifier = "Cell"
+import SDWebImage
 
 class FriendsCollectionViewController: UICollectionViewController {
-
+    
+    var friendID: Int = 0
+    private var photosAPI = PhotosAPI()
+    private var photos: [PhotosDTO] = []
     
     var images: [UIImage] = [
         UIImage(named: "BartolomeoDAlviano.01.png")!,
@@ -34,6 +36,15 @@ class FriendsCollectionViewController: UICollectionViewController {
         //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
+        
+        // получаем фотографии
+        photosAPI.getPhotos(friendID: friendID) { [weak self] photos  in
+            guard let self = self else { return }
+            
+            self.photos = photos
+            self.collectionView.reloadData()
+
+        }
     }
 
     /*
@@ -56,15 +67,16 @@ class FriendsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return images.count
+        return photos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendImageCell", for: indexPath) as! FriendsCollectionViewCell
     
-        let image = images[indexPath.row]
-        cell.friendImage.image = image
-    
+        let photo = photos[indexPath.row]
+        if let url = URL(string: photo.sizes[0].url) {
+            cell.friendImage?.sd_setImage(with: url, completed: nil)
+        }
         return cell
     }
 

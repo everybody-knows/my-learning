@@ -7,17 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE01AFBD276A7D540096BCFC /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01AFBC276A7D540096BCFC /* Session.swift */; };
+		CE01AFBD276A7D540096BCFC /* SessionSingletone.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01AFBC276A7D540096BCFC /* SessionSingletone.swift */; };
 		CE01AFC1276A8C090096BCFC /* WebViewLoginFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01AFC0276A8C090096BCFC /* WebViewLoginFormController.swift */; };
+		CE2A4DA82771EEA30029A250 /* Data+PrettyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A4DA72771EEA30029A250 /* Data+PrettyJSON.swift */; };
+		CE2A4DAA27720B9F0029A250 /* Friends(CodableContainer).swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A4DA927720B9F0029A250 /* Friends(CodableContainer).swift */; };
+		CE2A4DAC2772375A0029A250 /* FriendsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2A4DAB2772375A0029A250 /* FriendsAPI.swift */; };
 		CE63825A2673A10900180586 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6382592673A10900180586 /* NewsTableViewController.swift */; };
+		CE7B83852784EB9B00E3764A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = CE7B83842784EB9B00E3764A /* SDWebImage */; };
+		CE7B83872785084400E3764A /* GroupsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B83862785084400E3764A /* GroupsAPI.swift */; };
+		CE7B838A2786211100E3764A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE7B83892786211100E3764A /* Alamofire */; };
+		CE7B838D278621DD00E3764A /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = CE7B838C278621DD00E3764A /* SwiftyJSON */; };
+		CE7B838F278660C400E3764A /* PhotosAPI(Alamofire+SwiftyJSON).swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B838E278660C400E3764A /* PhotosAPI(Alamofire+SwiftyJSON).swift */; };
+		CE7B83912786623D00E3764A /* Photos(DataTransferObject).swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B83902786623D00E3764A /* Photos(DataTransferObject).swift */; };
 		CE9D699F262CAFA100AE6CD5 /* FriendAvatarShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D699E262CAFA100AE6CD5 /* FriendAvatarShadowView.swift */; };
 		CEC89DCD2624721A003D9CE6 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC89DCC2624721A003D9CE6 /* GradientView.swift */; };
 		CED89D1625D1D3A80013C4ED /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED89D1525D1D3A80013C4ED /* FriendsTableViewController.swift */; };
 		CED89D1925D1D3C50013C4ED /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED89D1825D1D3C50013C4ED /* FriendsTableViewCell.swift */; };
 		CED89D1D25D2F8EB0013C4ED /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED89D1C25D2F8EB0013C4ED /* GroupsTableViewCell.swift */; };
 		CED89D2025D2F9020013C4ED /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED89D1F25D2F9020013C4ED /* GroupsTableViewController.swift */; };
-		CED89D2425D2F9580013C4ED /* AllGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED89D2325D2F9580013C4ED /* AllGroupsTableViewController.swift */; };
-		CED89D2725D2F9580013C4ED /* AllGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED89D2625D2F9580013C4ED /* AllGroupsTableViewCell.swift */; };
+		CED89D2425D2F9580013C4ED /* SearchGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED89D2325D2F9580013C4ED /* SearchGroupsTableViewController.swift */; };
+		CED89D2725D2F9580013C4ED /* SearchGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED89D2625D2F9580013C4ED /* SearchGroupsTableViewCell.swift */; };
 		CED8D04E2625E311007FA559 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED8D04D2625E311007FA559 /* HeartButton.swift */; };
 		CEE65F8A25FAC0D000DD1291 /* FriendsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE65F8925FAC0D000DD1291 /* FriendsCollectionViewController.swift */; };
 		CEE65F8D25FAC19800DD1291 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE65F8C25FAC19800DD1291 /* FriendsCollectionViewCell.swift */; };
@@ -30,21 +39,27 @@
 		CEFAA05725C2E91600DBFA5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFAA05525C2E91600DBFA5A /* LaunchScreen.storyboard */; };
 		CEFAA06225C2E9BB00DBFA5A /* LoginFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAA06125C2E9BB00DBFA5A /* LoginFormController.swift */; };
 		CEFF675D260CB5FC002FF847 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF675C260CB5FC002FF847 /* User.swift */; };
-		CEFF6761260CB613002FF847 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF6760260CB613002FF847 /* Group.swift */; };
+		CEFF6761260CB613002FF847 /* Groups(Manual).swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF6760260CB613002FF847 /* Groups(Manual).swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CE01AFBC276A7D540096BCFC /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		CE01AFBC276A7D540096BCFC /* SessionSingletone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionSingletone.swift; sourceTree = "<group>"; };
 		CE01AFC0276A8C090096BCFC /* WebViewLoginFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewLoginFormController.swift; sourceTree = "<group>"; };
+		CE2A4DA72771EEA30029A250 /* Data+PrettyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+PrettyJSON.swift"; sourceTree = "<group>"; };
+		CE2A4DA927720B9F0029A250 /* Friends(CodableContainer).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friends(CodableContainer).swift"; sourceTree = "<group>"; };
+		CE2A4DAB2772375A0029A250 /* FriendsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAPI.swift; sourceTree = "<group>"; };
 		CE6382592673A10900180586 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
+		CE7B83862785084400E3764A /* GroupsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsAPI.swift; sourceTree = "<group>"; };
+		CE7B838E278660C400E3764A /* PhotosAPI(Alamofire+SwiftyJSON).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosAPI(Alamofire+SwiftyJSON).swift"; sourceTree = "<group>"; };
+		CE7B83902786623D00E3764A /* Photos(DataTransferObject).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photos(DataTransferObject).swift"; sourceTree = "<group>"; };
 		CE9D699E262CAFA100AE6CD5 /* FriendAvatarShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAvatarShadowView.swift; sourceTree = "<group>"; };
 		CEC89DCC2624721A003D9CE6 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		CED89D1525D1D3A80013C4ED /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		CED89D1825D1D3C50013C4ED /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		CED89D1C25D2F8EB0013C4ED /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
 		CED89D1F25D2F9020013C4ED /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
-		CED89D2325D2F9580013C4ED /* AllGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsTableViewController.swift; sourceTree = "<group>"; };
-		CED89D2625D2F9580013C4ED /* AllGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGroupsTableViewCell.swift; sourceTree = "<group>"; };
+		CED89D2325D2F9580013C4ED /* SearchGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGroupsTableViewController.swift; sourceTree = "<group>"; };
+		CED89D2625D2F9580013C4ED /* SearchGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGroupsTableViewCell.swift; sourceTree = "<group>"; };
 		CED8D04D2625E311007FA559 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		CEE65F8925FAC0D000DD1291 /* FriendsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewController.swift; sourceTree = "<group>"; };
 		CEE65F8C25FAC19800DD1291 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -59,7 +74,7 @@
 		CEFAA05825C2E91600DBFA5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEFAA06125C2E9BB00DBFA5A /* LoginFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormController.swift; sourceTree = "<group>"; };
 		CEFF675C260CB5FC002FF847 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		CEFF6760260CB613002FF847 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		CEFF6760260CB613002FF847 /* Groups(Manual).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Groups(Manual).swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +82,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7B838D278621DD00E3764A /* SwiftyJSON in Frameworks */,
+				CE7B83852784EB9B00E3764A /* SDWebImage in Frameworks */,
+				CE7B838A2786211100E3764A /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,10 +116,21 @@
 		CE0FF96727680CBA00C5C267 /* Client-Server */ = {
 			isa = PBXGroup;
 			children = (
-				CE01AFBC276A7D540096BCFC /* Session.swift */,
+				CE01AFBC276A7D540096BCFC /* SessionSingletone.swift */,
 				CE01AFC0276A8C090096BCFC /* WebViewLoginFormController.swift */,
+				CE2A4DAB2772375A0029A250 /* FriendsAPI.swift */,
+				CE7B83862785084400E3764A /* GroupsAPI.swift */,
+				CE7B838E278660C400E3764A /* PhotosAPI(Alamofire+SwiftyJSON).swift */,
 			);
 			path = "Client-Server";
+			sourceTree = "<group>";
+		};
+		CE2A4DA62771EE840029A250 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CE2A4DA72771EEA30029A250 /* Data+PrettyJSON.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		CED89D1425D1D3810013C4ED /* FriendsTab */ = {
@@ -121,8 +150,8 @@
 			children = (
 				CED89D1F25D2F9020013C4ED /* GroupsTableViewController.swift */,
 				CED89D1C25D2F8EB0013C4ED /* GroupsTableViewCell.swift */,
-				CED89D2325D2F9580013C4ED /* AllGroupsTableViewController.swift */,
-				CED89D2625D2F9580013C4ED /* AllGroupsTableViewCell.swift */,
+				CED89D2325D2F9580013C4ED /* SearchGroupsTableViewController.swift */,
+				CED89D2625D2F9580013C4ED /* SearchGroupsTableViewCell.swift */,
 			);
 			path = GroupsTab;
 			sourceTree = "<group>";
@@ -165,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				CE0FF96527680C2900C5C267 /* Application */,
+				CE2A4DA62771EE840029A250 /* Extension */,
 				CE0FF96727680CBA00C5C267 /* Client-Server */,
 				CEFAA04A25C2E91400DBFA5A /* AppDelegate.swift */,
 				CEFAA05325C2E91600DBFA5A /* Assets.xcassets */,
@@ -180,7 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				CEFF675C260CB5FC002FF847 /* User.swift */,
-				CEFF6760260CB613002FF847 /* Group.swift */,
+				CEFF6760260CB613002FF847 /* Groups(Manual).swift */,
+				CE2A4DA927720B9F0029A250 /* Friends(CodableContainer).swift */,
+				CE7B83902786623D00E3764A /* Photos(DataTransferObject).swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -201,6 +233,11 @@
 			dependencies = (
 			);
 			name = Homework;
+			packageProductDependencies = (
+				CE7B83842784EB9B00E3764A /* SDWebImage */,
+				CE7B83892786211100E3764A /* Alamofire */,
+				CE7B838C278621DD00E3764A /* SwiftyJSON */,
+			);
 			productName = Homework;
 			productReference = CEFAA04725C2E91400DBFA5A /* Homework.app */;
 			productType = "com.apple.product-type.application";
@@ -228,6 +265,11 @@
 				Base,
 			);
 			mainGroup = CEFAA03E25C2E91400DBFA5A;
+			packageReferences = (
+				CE7B83832784EB9A00E3764A /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				CE7B83882786211100E3764A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				CE7B838B278621DD00E3764A /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = CEFAA04825C2E91400DBFA5A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -260,22 +302,28 @@
 				CEEFE0822746F92B00E9877C /* NewsTableViewCustomCell.swift in Sources */,
 				CEFAA06225C2E9BB00DBFA5A /* LoginFormController.swift in Sources */,
 				CEC89DCD2624721A003D9CE6 /* GradientView.swift in Sources */,
+				CE7B838F278660C400E3764A /* PhotosAPI(Alamofire+SwiftyJSON).swift in Sources */,
 				CE63825A2673A10900180586 /* NewsTableViewController.swift in Sources */,
-				CED89D2725D2F9580013C4ED /* AllGroupsTableViewCell.swift in Sources */,
+				CED89D2725D2F9580013C4ED /* SearchGroupsTableViewCell.swift in Sources */,
 				CEE65F8A25FAC0D000DD1291 /* FriendsCollectionViewController.swift in Sources */,
 				CED89D2025D2F9020013C4ED /* GroupsTableViewController.swift in Sources */,
 				CEE65F8D25FAC19800DD1291 /* FriendsCollectionViewCell.swift in Sources */,
 				CEFAA04B25C2E91400DBFA5A /* AppDelegate.swift in Sources */,
-				CEFF6761260CB613002FF847 /* Group.swift in Sources */,
-				CE01AFBD276A7D540096BCFC /* Session.swift in Sources */,
+				CEFF6761260CB613002FF847 /* Groups(Manual).swift in Sources */,
+				CE01AFBD276A7D540096BCFC /* SessionSingletone.swift in Sources */,
+				CE7B83872785084400E3764A /* GroupsAPI.swift in Sources */,
 				CEFAA04D25C2E91400DBFA5A /* SceneDelegate.swift in Sources */,
+				CE2A4DA82771EEA30029A250 /* Data+PrettyJSON.swift in Sources */,
+				CE7B83912786623D00E3764A /* Photos(DataTransferObject).swift in Sources */,
 				CE9D699F262CAFA100AE6CD5 /* FriendAvatarShadowView.swift in Sources */,
 				CE01AFC1276A8C090096BCFC /* WebViewLoginFormController.swift in Sources */,
 				CED89D1D25D2F8EB0013C4ED /* GroupsTableViewCell.swift in Sources */,
-				CED89D2425D2F9580013C4ED /* AllGroupsTableViewController.swift in Sources */,
+				CED89D2425D2F9580013C4ED /* SearchGroupsTableViewController.swift in Sources */,
 				CED8D04E2625E311007FA559 /* HeartButton.swift in Sources */,
 				CED89D1925D1D3C50013C4ED /* FriendsTableViewCell.swift in Sources */,
 				CED89D1625D1D3A80013C4ED /* FriendsTableViewController.swift in Sources */,
+				CE2A4DAC2772375A0029A250 /* FriendsAPI.swift in Sources */,
+				CE2A4DAA27720B9F0029A250 /* Friends(CodableContainer).swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +525,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE7B83832784EB9A00E3764A /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.12.2;
+			};
+		};
+		CE7B83882786211100E3764A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		CE7B838B278621DD00E3764A /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE7B83842784EB9B00E3764A /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE7B83832784EB9A00E3764A /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		CE7B83892786211100E3764A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE7B83882786211100E3764A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		CE7B838C278621DD00E3764A /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE7B838B278621DD00E3764A /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CEFAA03F25C2E91400DBFA5A /* Project object */;
 }
