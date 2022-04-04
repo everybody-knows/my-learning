@@ -10,10 +10,10 @@ import RealmSwift
 
 class FriendsDAO : Object,Decodable {
 
-    @objc dynamic var canAccessClosed : Bool = Bool()
+//    @objc dynamic var canAccessClosed : Bool = Bool()
     @objc dynamic var firstName : String = String()
     @objc dynamic var id : Int = Int()
-    @objc dynamic var isClosed : Bool = Bool()
+//    @objc dynamic var isClosed : Bool = Bool()
     @objc dynamic var lastName : String = String()
     @objc dynamic var photo50 : String = String()
     @objc dynamic var trackCode : String = String()
@@ -34,10 +34,10 @@ class FriendsDAO : Object,Decodable {
     convenience required init(from decoder: Decoder) throws {
         self.init()
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        canAccessClosed = try values.decode(Bool.self, forKey: .canAccessClosed)
+//        canAccessClosed = try values.decode(Bool.self, forKey: .canAccessClosed)
         firstName = try values.decode(String.self, forKey: .firstName)
         id = try values.decode(Int.self, forKey: .id)
-        isClosed = try values.decode(Bool.self, forKey: .isClosed)
+//        isClosed = try values.decode(Bool.self, forKey: .isClosed)
         lastName = try values.decode(String.self, forKey: .lastName)
         photo50 = try values.decode(String.self, forKey: .photo50)
         trackCode = try values.decode(String.self, forKey: .trackCode)

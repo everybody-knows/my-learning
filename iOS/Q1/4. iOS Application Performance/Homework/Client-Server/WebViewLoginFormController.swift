@@ -60,7 +60,7 @@ class WebViewLoginFormController: UIViewController, WKNavigationDelegate {
         print("TOKEN= \(token)")
         
         //Обязательно выполнить перед коммитом в GitHub: "Бэ" - Бэзопастность! :)
-        //WebCacheCleaner.clean()
+        WebCacheCleaner.clean()
 
         //Переход на таббар
         performSegue(withIdentifier: "tabBarSegue", sender: nil)
