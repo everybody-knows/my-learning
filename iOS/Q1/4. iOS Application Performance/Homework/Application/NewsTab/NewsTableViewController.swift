@@ -9,12 +9,15 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
     
-    var imageCarnival: UIImage = UIImage(named: "Сarnival")!
+    let newsAuthorImage: UIImage = UIImage(named: "GroupIcon.png")!
+    let imageCarnival: UIImage = UIImage(named: "Сarnival")!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
-        tableView.register(UINib(nibName: "NewsTableViewCustomCell", bundle: nil), forCellReuseIdentifier: "newsCustomCell")
+ //       tableView.register(UINib(nibName: "NewsTableViewAuthorCell", bundle: nil), forCellReuseIdentifier: "newsAuthorCell")
+ //g       tableView.register(UINib(nibName: "NewsTableViewTextCell", bundle: nil), forCellReuseIdentifier: "newsTextCell")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -32,20 +35,40 @@ class NewsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return 4
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "newsCustomCell", for: indexPath) as! NewsTableViewCustomCell
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "newsAuthorCell", for: indexPath) as! NewsTableViewAuthorCell
+            cell.newsAuthorImage.image = newsAuthorImage
+            cell.newsAuthorName.text = "News Author Name"
+            cell.newsDate.text = "Today"
+            return cell
+        }
+        if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "newsTextCell", for: indexPath) as! NewsTableViewTextCell
+            //cell.newsTextView.text = "Hello world"
+            
+            self.tableView.estimatedRowHeight = 166.0;
+            return cell
+        }
+        if indexPath.row == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "newsImageCell", for: indexPath) as! NewsTableViewImageCell
+            cell.newsImageView.image = imageCarnival
+            return cell
+        }
+        if indexPath.row == 3 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "newsLikesAndCommentsCell", for: indexPath) as! NewsTableViewLikesAndCommentsCell
+            cell.newsLikesCount.text = "5"
+            cell.newsCommentsCount.text = "11"
+            return cell
+        }
         
-        cell.newsImage.frame.size.width = UIScreen.main.bounds.width
-        cell.newsImage.frame.size.height = UIScreen.main.bounds.width
-        cell.newsImage?.image = imageCarnival
-
-        return cell
-        
+        return UITableViewCell()
     }
+    
     
 
     /*
