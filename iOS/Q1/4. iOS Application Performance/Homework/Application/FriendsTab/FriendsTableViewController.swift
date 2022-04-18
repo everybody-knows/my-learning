@@ -11,6 +11,8 @@ import RealmSwift
 
 final class FriendsTableViewController: UITableViewController {
     
+    
+    
     private var friendsAPI = FriendsAPI()
 //    private var friends: [Friends] = []
     private var friends: Results<FriendsDAO>?
