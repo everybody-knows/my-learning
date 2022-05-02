@@ -23,16 +23,6 @@ import UIKit
         self.layer.shadowOpacity = shadowOpacity
         self.layer.shadowRadius = shadowRadius
 
-        // add the border to subview
-//        let borderView = UIView()
-//        borderView.frame = self.bounds
-//        borderView.layer.cornerRadius = self.bounds.height / 2
-//        borderView.layer.borderColor = UIColor.black.cgColor
-//        borderView.layer.borderWidth = 1.0
-//        borderView.layer.masksToBounds = true
-//        self.addSubview(borderView)
-
     }
-    
 
 }

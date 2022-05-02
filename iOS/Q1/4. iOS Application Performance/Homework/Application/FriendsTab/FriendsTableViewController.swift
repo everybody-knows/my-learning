@@ -11,25 +11,15 @@ import RealmSwift
 
 final class FriendsTableViewController: UITableViewController {
     
-    
-    
     private var friendsAPI = FriendsAPI()
-//    private var friends: [Friends] = []
     private var friends: Results<FriendsDAO>?
     private var friendsDB = FriendsDB()
     private var friendsDictionary = [String: [FriendsDAO]]()
     private var friendSectionTitles = [String]()
     private var notificationToken: NotificationToken?
-    
-        
+       
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         //удаляем список друзей из Realm DB
         self.friends = self.friendsDB.fetch()
@@ -38,14 +28,11 @@ final class FriendsTableViewController: UITableViewController {
         // получаем список друзей
         friendsAPI.getFriends { [weak self] friends  in
             guard let self = self else { return }
-//            //сохраняем список друзей в струкруре Friends
-//            self.friends = friends
             //сохраняем список групп в Realm DB
             self.friendsDB.save(friends)
             //получаем список групп из Realm DB
             self.friends = self.friendsDB.fetch()
-              
-            
+                          
             // формируем заголовки для секций ф таблице
             for friend in friends {
                 let friendKey = String(friend.lastName.prefix(1))
@@ -59,8 +46,6 @@ final class FriendsTableViewController: UITableViewController {
             // сортируем заголовки для секций
             self.friendSectionTitles = [String](self.friendsDictionary.keys)
             self.friendSectionTitles = self.friendSectionTitles.sorted(by: { $0 < $1 })
-
-            //self.tableView.reloadData()
             
             //автоматическое обновление при изменении данных в Realm через notifications
             self.notificationToken = self.friends?.observe(on: .main, { [weak self] changes in
@@ -81,15 +66,11 @@ final class FriendsTableViewController: UITableViewController {
                 case .error(let error):
                     print("\(error)")
                 }
-
             })
-            
         }
-        
-
     }
 
-    // MARK: - Table view data source
+    // MARK: - Navigation
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -107,7 +88,6 @@ final class FriendsTableViewController: UITableViewController {
             return 0
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendsTableViewCell
         
@@ -117,7 +97,6 @@ final class FriendsTableViewController: UITableViewController {
             if let friendValues = friendsDictionary[friendKey] {
                 let friend = friendValues[indexPath.row]
                 cell.friendName?.text = "\(friend.lastName) \(friend.firstName)"
-               // cell.friendAvatar?.image = UIImage(named:friendValues[indexPath.row])!
                 if let url = URL(string: friend.photo50) {
                     cell.friendAvatar?.sd_setImage(with: url, completed: { image, _, _, _ in
                         tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -140,54 +119,8 @@ final class FriendsTableViewController: UITableViewController {
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
        return friendSectionTitles
     }
-    
-    
-    
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
         
     //анимация при нажатии на аватар
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)

@@ -40,16 +40,10 @@ import UIKit
 
         heartPath.stroke()
 
-   //     self.addTarget(self, action: #selector(onPress), for: .touchUpInside)
-
         if self.filled {
             self.tintColor.setFill()
             heartPath.fill()
         }
     }
     
-    
-  //  @objc func onPress() {
-  //      self.filled = !self.filled
-  //  }
 }

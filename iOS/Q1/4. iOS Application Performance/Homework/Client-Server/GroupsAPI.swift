@@ -88,23 +88,18 @@ final class GroupsAPI {
         guard let url = urlConstructor.url else { return }
         // задача для запуска
         let task = session.dataTask(with: url) { (data, response, error) in
-            // данные полученные от сервера преобразуем в json
-            //   let jsonData = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? Data
-            //  guard let jsonData = data?.prettyJSON else {return}
-            // выводим в консоль
-            //  print(jsonData)
+            
+              // MARK: - JSON Debug
+//            // данные полученные от сервера преобразуем в json
+//               let jsonData = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? Data
+//              guard let jsonData = data?.prettyJSON else {return}
+//            // выводим в консоль
+//              print(jsonData)
 
             guard let jsonData = data else {return}
             DispatchQueue.main.async {
                 do {
-//                    // данные полученные от сервер преобразуем в объект
-//                    let jsonData: Any = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
-//                    let jsonObject = jsonData as! [String: Any]
-//                    let response = jsonObject["response"] as! [String: Any]
-//                    let items = response["items"] as! [Any]
-//
-//                    let searchGroups = items.map { GroupsDAO(item: $0 as! [String: Any]) }
-                    
+                  
                     // данные полученные от сервера преобразуем в DAO
                     let itemsData = try JSON(jsonData)["response"]["items"].rawData()
                     let searchGroups = try JSONDecoder().decode([GroupsDAO].self, from: itemsData)

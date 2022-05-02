@@ -35,6 +35,7 @@ final class PhotosAPI {
         AF.request(url, method: .get, parameters: params).responseJSON { response in
 
             guard let jsonData = response.data else { return }
+            // MARK: - JSON Debug
 //            print(response.data?.prettyJSON)
             do {
                 // данные полученные от сервер преобразуем в объект

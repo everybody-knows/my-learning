@@ -13,7 +13,6 @@ import Firebase
 class GroupsTableViewController: UITableViewController {
     
     private var groupsAPI = GroupsAPI()
-//    private var groups: [Groups] = []
     
     private var groupsDB = GroupsDB()
     private var groups: Results<GroupsDAO>?
@@ -21,18 +20,9 @@ class GroupsTableViewController: UITableViewController {
     
     //ссылка на контейнер в Firebase
     let refFB = Database.database().reference(withPath: "LoggedUsers/\(Session.instance.userId)/addedGroups")
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
         
         //удаляем список групп из Realm DB
         self.groups = self.groupsDB.fetch()
@@ -41,15 +31,10 @@ class GroupsTableViewController: UITableViewController {
         // получаем список групп
         groupsAPI.getGroups { [weak self] groups  in
             guard let self = self else { return }
-//            //сохраняем список групп в струкруре Groups
-//            self.groups = groups
-
             //сохраняем список групп в Realm DB
             self.groupsDB.save(groups)
             //получаем список групп из Realm DB
             self.groups = self.groupsDB.fetch()
-            // обновляем таблицу
-            //self.tableView.reloadData()
             
             //автоматическое обновление при изменении данных в Realm через notifications
             self.notificationToken = self.groups?.observe(on: .main, { [weak self] changes in
@@ -104,16 +89,6 @@ class GroupsTableViewController: UITableViewController {
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         // Если была нажата кнопка «Удалить»
@@ -125,22 +100,6 @@ class GroupsTableViewController: UITableViewController {
         }
 
     }
-    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation
@@ -162,23 +121,15 @@ class GroupsTableViewController: UITableViewController {
             if let indexPath = searchGroupsController.tableView.indexPathForSelectedRow {
                 // Получаем группу по индексу
                 let group = searchGroupsController.searchGroups[indexPath.row]
-//                // Добавляем группу в список групп
-//                groups.append(group)
-//                // Обновляем таблицу
-//                tableView.reloadData()
                 
                 // добавляем группу в Realm
                 self.groupsDB.save([group])
-                //получаем список групп из Realm DB
-                //self.groups = self.groupsDB.fetch()
                 
                 //добавляем группу в Firebase
                 let groupFB = GroupFB(id: group.id, name: group.name, photo50: group.photo50)
                 let groupContainerRef = self.refFB.child(String(group.id))
                 groupContainerRef.setValue(groupFB.toAnyObject())
             
-                // Обновляем таблицу
-                //tableView.reloadData()
             }
         }
     }

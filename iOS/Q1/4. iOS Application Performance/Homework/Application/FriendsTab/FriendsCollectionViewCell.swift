@@ -25,11 +25,9 @@ class FriendsCollectionViewCell: UICollectionViewCell {
     @IBAction func heartButtonPressed(_ sender: HeartButton) {
         if self.heartButton.filled {
             self.heartButton.filled = false
-            //self.heartCount.text = "0"
             animateHeartCount(toText: "0")
         } else {
             self.heartButton.filled = true
-            //self.heartCount.text = "1"
             animateHeartCount(toText: "1")
         }
     }
